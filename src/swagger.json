@@ -1,0 +1,148 @@
+{
+  "openapi": "3.0.0",
+  "title": "Solid-Node",
+  "descriptions": "This is an answer of challenge about SOLID principles with nodeJS",
+  "contact": {
+    "name": "Luiz Gustavo Chinelato Setten",
+    "email": "luizgustavosetten@hotmail.com"
+  },
+  "version": "1.0.0",
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "List all users",
+        "responses": {
+          "200": {
+            "description": "List of users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "admin": {
+                        "type": "boolean"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "description": "E-mail of user",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of user",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "email"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error ocourred",
+            "content": {
+              "application/json": {
+                "error": {
+                  "description": "Explains what happened",
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/:user_id": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Show information about specified user",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ID of user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/users/:user_id/admin": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Turn user into an administrator",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ID of user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
